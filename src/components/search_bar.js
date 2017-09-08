@@ -9,11 +9,38 @@ import React, { Component } from 'react';
 // their is update on this component. Basically these help to communicate with
 // other components
 
+
+// state is plain javascript object that reacts to user inputs
+// Each class based component has state object
 // Every class has render method
-class SearchBar extends Component {
-    render() {
-      return <input />
+class searchBar extends Component {
+    // All javascript classes has special fucntion called constructor
+    // this.setState need to updated when changing input
+    constructor(props){
+      super(props);
+
+      this.state = {term : 'please input something'};
     }
+
+    render() {
+      // return <input onChange = {this.onInputChange} />
+      // return <input onChange = {(event) => console.log(event.target.value)} />;
+      // when ever we use javascript variable inside of JSX we use {}
+      // when setState is called the component re-renders again
+      return (
+      <div>
+          <input
+          value = {this.state.term}
+          onChange = {(event) => this.setState({term : event.target.value})} />
+          Value of the input : {this.state.term}
+      </div>
+      );
+    }
+    // find more on react docs
+
+    // onInputChange(event) {
+    //   console.log(event.target.value);
+    // }
 }
 
 export default searchBar;
