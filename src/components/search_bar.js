@@ -19,7 +19,7 @@ class searchBar extends Component {
     constructor(props){
       super(props);
 
-      this.state = {term : 'please input something'};
+      this.state = {term : ''};
     }
 
     render() {
@@ -27,11 +27,12 @@ class searchBar extends Component {
       // return <input onChange = {(event) => console.log(event.target.value)} />;
       // when ever we use javascript variable inside of JSX we use {}
       // when setState is called the component re-renders again
+      // controlled components
       return (
-      <div>
+      <div className="search-bar">
           <input
           value = {this.state.term}
-          onChange = {(event) => this.setState({term : event.target.value})} />
+          onChange = {(event) => this.onInputChange(event.target.value)} />
           Value of the input : {this.state.term}
       </div>
       );
@@ -41,6 +42,12 @@ class searchBar extends Component {
     // onInputChange(event) {
     //   console.log(event.target.value);
     // }
+    
+    
+    onInputChange(term){
+        this.setState({term});
+        this.props.onSearchTermChange(term); 
+    }
 }
 
 export default searchBar;
