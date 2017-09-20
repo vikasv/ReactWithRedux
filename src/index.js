@@ -1,26 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import Inputter from './components/inputter';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
 
-class App extends Component {
-    constructor(props){
-        super(props);
-        
-        this.state = {myInputValue : 'vik'};
-    }
-    
-    changeValue(inp){
-        this.setState({myInputValue : inp});
-    }
-    
-    render(){
-        return(
-                <div>
-                    <p> {this.state.myInputValue} </p>
-                    <Inputter onChangeElement = {myInputValue => this.changeValue(myInputValue)}/>
-                </div>
-        );
-    };
-}
+import App from './components/app';
+import reducers from './reducers';
 
-ReactDOM.render(<App />, document.querySelector('.container'));
+const createStoreWithMiddleware = applyMiddleware()(createStore);
+
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <App />
+  </Provider>
+  , document.querySelector('.container'));
